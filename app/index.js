@@ -14,4 +14,6 @@ const app = express()
 app.use(json())
 app.use(cors())
 
-app.listen(process.env.PORT_APP || 5555, () => console.log(`app running in port ${process.env.PORT_APP} 🚀🚀🚀🚀🚀`))
+app.listen(process.env.PORT_APP || 5555, () =>
+  console.log(`app running in port ${process.env.PORT_APP} 🚀🚀🚀🚀🚀`)
+)
