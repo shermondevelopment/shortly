@@ -1,6 +1,6 @@
 export default async (dataValidation, schema) => {
   try {
-    await schema.validate(dataValidation, schema)
+    await schema.validateAsync(dataValidation)
   } catch (error) {
     return error.message
   }

@@ -1,16 +1,19 @@
 import Joi from 'joi'
 
 const SignupValidation = Joi.object({
-  name: Joi.string()
-    .required()
-    .error(() => 'name is required'),
-  email: Joi.string().required().email(),
+  name: Joi.string().required().messages({
+    'string.empty': `name is required`
+  }),
+  email: Joi.string().required().email().messages({
+    'string.empty': `email is required`,
+    'string.email': `email how format invalid`
+  }),
   password: Joi.string()
     .required()
-    .error(() => 'password is required'),
+    .messages({ 'string.empty': `password is required` }),
   confirmPassword: Joi.string()
     .required()
-    .error(() => 'confirmPassword is required')
+    .messages({ 'string.empty': `confirmPassword is required` })
 })
 
 export default SignupValidation
