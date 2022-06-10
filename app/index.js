@@ -19,6 +19,6 @@ app.use(cors())
 app.use(router)
 
 /** listen in port 555 */
-app.listen(process.env.PORT_APP || 5555, () =>
+app.listen(process.env.PORT || 5555, () =>
   console.log(`app running in port ${process.env.PORT_APP} 🚀🚀🚀🚀🚀`)
 )

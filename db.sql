@@ -2,7 +2,7 @@ CREATE TABLE IF NOT EXISTS users (
   id serial not null primary key,
   name varchar not null,
   email varchar not null unique,
-  password varchar not null,
+  password varchar not null
 )
 
 CREATE TABLE IF NOT EXISTS shorten (
