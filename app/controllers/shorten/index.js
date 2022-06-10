@@ -50,4 +50,29 @@ const UrlList = async (req, res) => {
   }
 }
 
-export { Shorten, UrlList }
+const UrlOpen = async (req, res) => {
+  try {
+    const { shortUrl } = req.params
+
+    const url = await db.query('select * from shorten where shorturl = $1', [
+      shortUrl
+    ])
+
+    if (!url.rowCount) {
+      return res.status(404).json({ error: 'url no exists' })
+    }
+
+    let countVisit = url.rows[0].visit + 1
+
+    await db.query('update shorten set visit = $1 where id = $2', [
+      countVisit,
+      url.rows[0].id
+    ])
+
+    res.redirect(url.rows[0].url)
+  } catch (error) {
+    res.status(500).json({ error: 'internal server error' })
+  }
+}
+
+export { Shorten, UrlList, UrlOpen }
