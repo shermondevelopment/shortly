@@ -75,4 +75,28 @@ const UrlOpen = async (req, res) => {
   }
 }
 
-export { Shorten, UrlList, UrlOpen }
+const DeleteURl = async (req, res) => {
+  try {
+    const { id } = req.params
+    const user = res.locals.user
+
+    const url = await db.query('select * from shorten where id = $1', [id])
+
+    if (!url.rowCount) {
+      res.sendStatus(404)
+    }
+
+    if (url.rows[0].user_id !== user.id) {
+      return res.sendStatus(401)
+    }
+
+    await db.query('delete from shorten where id = $1', [id])
+
+    res.sendStatus(204)
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ error: 'internal server error' })
+  }
+}
+
+export { Shorten, UrlList, UrlOpen, DeleteURl }
