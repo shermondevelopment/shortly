@@ -30,4 +30,24 @@ const Shorten = async (req, res) => {
   }
 }
 
-export default Shorten
+const UrlList = async (req, res) => {
+  try {
+    const { id } = req.params
+
+    const url = await db.query('select * from shorten where id = $1', [id])
+
+    if (!url.rowCount) {
+      return res.status(404).json({ error: 'url not exists' })
+    }
+
+    res.status(200).json({
+      id: url.rows[0].id,
+      shortUrl: url.rows[0].shorturl,
+      url: url.rows[0].url
+    })
+  } catch (error) {
+    res.status(500).json({ error: 'internal server error' })
+  }
+}
+
+export { Shorten, UrlList }

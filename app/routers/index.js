@@ -11,7 +11,7 @@ import Signup from '../controllers/signup/index.js'
 import Signin from '../controllers/signin/index.js'
 
 /** Shorten */
-import Shorten from '../controllers/shorten/index.js'
+import { Shorten, UrlList } from '../controllers/shorten/index.js'
 
 /** route method */
 const router = Router()
@@ -19,5 +19,6 @@ const router = Router()
 router.post('/signup', Signup)
 router.post('/signin', Signin)
 router.post('/urls/shorten', Authentication, Shorten)
+router.get('/urls/:id', UrlList)
 
 export default router
