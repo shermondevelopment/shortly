@@ -33,4 +33,16 @@ const Users = async (req, res) => {
   }
 }
 
-export default Users
+const UsersRanking = async (req, res) => {
+  try {
+    const shortenAll =
+      await db.query(`select u.id, u.name, count(u.id) as "linksCount",  COALESCE(SUM(s.visit),0) as "visitCount" from shorten as s right join users as 
+    u on s.user_id = u.id group by u.id, s.user_id ORDER BY "visitCount" DESC LIMIT 10`)
+    res.status(200).json(shortenAll.rows)
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ error: 'internal server error' })
+  }
+}
+
+export { Users, UsersRanking }

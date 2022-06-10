@@ -19,7 +19,7 @@ import {
 } from '../controllers/shorten/index.js'
 
 /** users */
-import Users from '../controllers/user/index.js'
+import { Users, UsersRanking } from '../controllers/user/index.js'
 
 /** route method */
 const router = Router()
@@ -31,5 +31,6 @@ router.get('/urls/:id', UrlList)
 router.get('/urls/open/:shortUrl', UrlOpen)
 router.delete('/urls/:id', Authentication, DeleteURl)
 router.get('/users/:id', Authentication, Users)
+router.get('/ranking', UsersRanking)
 
 export default router
