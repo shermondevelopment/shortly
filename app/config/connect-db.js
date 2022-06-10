@@ -3,7 +3,7 @@ import 'dotenv/config'
 
 const { Pool } = pg
 
-const dataBaseConfig = { connectString: process.env.DATABASE_URL }
+const dataBaseConfig = { connectionString: process.env.DATABASE_URL }
 
 if (process.env.MODE === 'PROD') {
   dataBaseConfig.ssl = {
