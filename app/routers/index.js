@@ -18,6 +18,9 @@ import {
   DeleteURl
 } from '../controllers/shorten/index.js'
 
+/** users */
+import Users from '../controllers/user/index.js'
+
 /** route method */
 const router = Router()
 
@@ -27,5 +30,6 @@ router.post('/urls/shorten', Authentication, Shorten)
 router.get('/urls/:id', UrlList)
 router.get('/urls/open/:shortUrl', UrlOpen)
 router.delete('/urls/:id', Authentication, DeleteURl)
+router.get('/users/:id', Authentication, Users)
 
 export default router
