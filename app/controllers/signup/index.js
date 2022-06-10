@@ -1,5 +1,5 @@
 /** validation */
-import SignupValidation from '../../validation/signup/index.js'
+import { SignupValidation } from '../../validation/signup/index.js'
 
 /** utils error */
 import shemaIsValid from '../../utils/error.js'
@@ -35,7 +35,7 @@ const Signup = async (req, res) => {
     const userExist = await userRepositroy.findUser(email)
 
     if (userExist.rowCount) {
-      return res.status(200).json({ error: 'users already registered' })
+      return res.status(409).json({ error: 'users already registered' })
     }
 
     const passwordCrypted = await bcrypt.hash(password, 10)

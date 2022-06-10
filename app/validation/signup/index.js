@@ -16,4 +16,14 @@ const SignupValidation = Joi.object({
     .messages({ 'string.empty': `confirmPassword is required` })
 })
 
-export default SignupValidation
+const SigninValidation = Joi.object({
+  email: Joi.string().required().email().messages({
+    'string.empty': 'email is required',
+    'string.email': 'email how format invalid'
+  }),
+  password: Joi.string().required().messages({
+    'string.empty': `password is required`
+  })
+})
+
+export { SignupValidation, SigninValidation }
